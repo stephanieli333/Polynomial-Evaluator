@@ -27,28 +27,16 @@ public class Polynomial
 	}
 	
 	/* 
-	 * TODO: Add new term to the polynomial. Also ensure the polynomial is
+	 * Add new term to the polynomial. Also ensure the polynomial is
 	 * in decreasing order of exponent.
 	 */
 	public void addTerm(Term t)
 	{	
-		/**** ADD CODE HERE ****/
-		
-		// Hint: Notice that the function SLinkedList.get(index) method is O(n), 
-		// so if this method were to call the get(index) 
-		// method n times then the method would be O(n^2).
-		// Instead, use a Java enhanced for loop to iterate through 
-		// the terms of an SLinkedList.
-		/*
-		for (Term currentTerm: polynomial)
-		{
-			// The for loop iterates over each term in the polynomial!!
-			// Example: System.out.println(currentTerm.getExponent()) should print the exponents of each term in the polynomial when it is not empty.  
-		}
-		*/
+		// if the coeff is 0, don't do anything
 		if(t.getCoefficient().compareTo(new BigInteger("0"))==0) {
 			return;
 		}
+		// if this is the first term, then add more simply using addFirst method
 		if(polynomial.size() == 0) {
 			polynomial.addFirst(t);
 			return;
@@ -87,16 +75,12 @@ public class Polynomial
 		return polynomial.get(index);
 	}
 	
-	//TODO: Add two polynomial without modifying either
+	//Adds two polynomial without modifying either
 	public static Polynomial add(Polynomial p1, Polynomial p2)
 	{
-		/**** ADD CODE HERE ****/
-		/*Polynomial sum = new Polynomial(p1.polynomial);
-		for(Term currentTerm:p2.polynomial) {
-			sum.addTerm(currentTerm);
-		}
-		*/
+		
 		Polynomial sum = new  Polynomial();
+		// make deep clones so as not to modify the actual input polynomials
 		SLinkedList<Term> p1p = p1.polynomial.deepClone();
 		SLinkedList<Term> p2p = p2.polynomial.deepClone();
 		while(p1p.size()>0 && p2p.size()>0) {
@@ -128,11 +112,9 @@ public class Polynomial
 		return sum;
 	}
 	
-	//TODO: multiply this polynomial by a given term.
+	// multiply this polynomial by a given term.
 	private void multiplyTerm(Term t)
 	{	
-		/**** ADD CODE HERE ****/
-		
 		SLinkedList<Term> product = new SLinkedList<Term>();
 		BigInteger coeff = t.getCoefficient();
 		if(coeff.compareTo(new BigInteger("0"))==0) {
@@ -150,10 +132,9 @@ public class Polynomial
 		this.polynomial = product;
 	}
 	
-	//TODO: multiply two polynomials
+	// multiply two polynomials
 	public static Polynomial multiply(Polynomial p1, Polynomial p2)
 	{
-		/**** ADD CODE HERE ****/
 		Polynomial product = new Polynomial();
 		if(p1.size()>=p2.size()) {
 			for(Term currentTerm:p1.polynomial) {
@@ -172,8 +153,8 @@ public class Polynomial
 		return product;
 	}
 	
-	//TODO: evaluate this polynomial.
-	// Hint:  The time complexity of eval() must be order O(m), 
+	// evaluate this polynomial.
+	// The time complexity of eval() must be order O(m), 
 	// where m is the largest degree of the polynomial. Notice 
 	// that the function SLinkedList.get(index) method is O(m), 
 	// so if your eval() method were to call the get(index) 
@@ -183,7 +164,6 @@ public class Polynomial
 
 	public BigInteger eval(BigInteger x)
 	{
-		/**** ADD CODE HERE ****/		   
         // Evaluate value of polynomial using Horner's method 
 		BigInteger eval = new BigInteger("0");
 		if(this.polynomial.size()!=0) {
